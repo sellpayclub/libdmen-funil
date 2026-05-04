@@ -13,12 +13,13 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<VSL />} />
+        <Route path="/" element={<Navigate to="/libmen" replace />} />
+        <Route path="/libmen" element={<VSL />} />
         <Route path="/2" element={<VSLWhite />} />
         <Route path="/white" element={<VSLWhite />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/checkout" element={<Sales />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/libmen" replace />} />
       </Routes>
     </HashRouter>
   );
