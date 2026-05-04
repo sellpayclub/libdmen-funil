@@ -202,6 +202,11 @@ export default function VSL() {
         </div>
 
       </div>
+      
+      {/* Dev Link to Page 2 */}
+      <div className="w-full text-center py-6 mt-8">
+        <Link to="/white" className="text-stone-400 text-xs hover:text-stone-600 underline">Acessar Página 02 (White)</Link>
+      </div>
     </div>
   );
 }
