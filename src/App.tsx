@@ -3,15 +3,28 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import VSL from './pages/VSL';
 import VSLWhite from './pages/VSLWhite';
 import Quiz from './pages/Quiz';
 import Sales from './pages/Sales';
 
 export default function App() {
+  // Flag global para forçar a renderização da página White (ideal para o Cloudflare Worker em SPAs)
+  const forceWhitePage = (window as any).__FORCE_WHITE_PAGE__ === true;
+
+  if (forceWhitePage) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<VSLWhite />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/libmen" replace />} />
         <Route path="/libmen" element={<VSL />} />
@@ -21,6 +34,6 @@ export default function App() {
         <Route path="/checkout" element={<Sales />} />
         <Route path="*" element={<Navigate to="/libmen" replace />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

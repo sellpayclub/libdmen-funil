@@ -43,8 +43,89 @@ export default function VSL() {
         <div className="bg-white rounded-[2rem] shadow-xl border border-stone-100 p-6 sm:p-10 mb-16 relative overflow-hidden">
           <div className="absolute -top-32 -left-32 w-64 h-64 bg-red-50 rounded-full blur-[80px] pointer-events-none"></div>
           
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center mb-10 text-stone-900 font-heading">Por que o LibidMen é diferente?</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center mb-6 text-stone-900 font-heading">Por que o LibidMen é diferente da maioria?</h2>
           
+          <div className="bg-red-50 border border-red-200 rounded-2xl p-6 md:p-8 mb-10 text-center relative shadow-sm">
+            <h3 className="text-xl sm:text-2xl font-black text-red-800 mb-4 uppercase tracking-wide">Produto Exclusivo e Sob Medida</h3>
+            <p className="text-stone-700 sm:text-lg font-medium max-w-3xl mx-auto leading-relaxed">
+              O LibidMen <strong>NÃO É um suplemento genérico</strong> de prateleira de farmácia. Ele é um composto com ingredientes naturais <strong className="text-red-700 bg-red-100 px-2 py-1 rounded inline-block mt-1 sm:mt-0 shadow-sm border border-red-200">manipulados e dosados INDIVIDUALMENTE para o seu caso</strong>, após uma criteriosa avaliação do seu perfil e histórico.
+            </p>
+          </div>
+
+          {/* Comparativo */}
+          <div className="grid md:grid-cols-2 gap-6 mb-16 relative z-10 w-full">
+            {/* Outros */}
+            <div className="bg-stone-50 border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-stone-200 p-2 rounded-full px-4 text-stone-600 font-black">OUTROS</div>
+                <h3 className="text-lg font-bold text-stone-500 leading-tight">Medicamentos e Suplementos Genéricos</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3"><span className="text-stone-400 font-bold text-xl mt-[-2px]">❌</span> <span className="text-stone-600 font-medium">Oferecem <strong>risco direto</strong> à sua saúde cardiovascular</span></li>
+                <li className="flex items-start gap-3"><span className="text-stone-400 font-bold text-xl mt-[-2px]">❌</span> <span className="text-stone-600 font-medium">Só funcionam <strong>temporariamente</strong> (efeitoinderela)</span></li>
+                <li className="flex items-start gap-3"><span className="text-stone-400 font-bold text-xl mt-[-2px]">❌</span> <span className="text-stone-600 font-medium"><strong>Doses genéricas:</strong> a mesma para você e para um idoso de 80 anos</span></li>
+                <li className="flex items-start gap-3"><span className="text-stone-400 font-bold text-xl mt-[-2px]">❌</span> <span className="text-stone-600 font-medium">Efeito cessa a longo prazo, seu corpo cria resistência</span></li>
+                <li className="flex items-start gap-3"><span className="text-stone-400 font-bold text-xl mt-[-2px]">❌</span> <span className="text-stone-600 font-medium"><strong>Não curam nada</strong>, apenas mascaram e tratam o sintoma momentâneo</span></li>
+              </ul>
+            </div>
+
+            {/* LibidMen */}
+            <div className="bg-gradient-to-b from-stone-900 to-black text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-stone-800 transform md:-translate-y-2">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-red-600 rounded-full blur-[70px] opacity-20 pointer-events-none"></div>
+              <div className="flex items-center gap-3 mb-6 relative z-10">
+                <div className="bg-red-600 p-2 rounded-full px-4 text-white font-black shadow-lg shadow-red-600/30 tracking-wide">LIBIDMEN</div>
+                <h3 className="text-lg font-bold text-stone-200">Tratamento Definitivo</h3>
+              </div>
+              <ul className="space-y-4 relative z-10">
+                <li className="flex items-start gap-3"><span className="text-green-500 font-bold text-xl mt-[-2px]">✓</span> <span className="text-white font-bold">100% Natural e Seguro <span className="text-stone-400 text-sm font-medium block sm:inline">(sem risco cardíaco)</span></span></li>
+                <li className="flex items-start gap-3"><span className="text-green-500 font-bold text-xl mt-[-2px]">✓</span> <span className="text-stone-300 font-medium">Trata a <strong>raiz do problema</strong> reativando o sistema natural</span></li>
+                <li className="flex items-start gap-3"><span className="text-green-500 font-bold text-xl mt-[-2px] animate-pulse">✓</span> <span className="font-bold text-white"><strong className="text-red-400">Dose Manipulada Individualmente</strong> baseada no seu corpo</span></li>
+                <li className="flex items-start gap-3"><span className="text-green-500 font-bold text-xl mt-[-2px]">✓</span> <span className="text-stone-300 font-medium">Devolve sua autonomia orgânica a longo prazo</span></li>
+                <li className="flex items-start gap-3"><span className="text-green-500 font-bold text-xl mt-[-2px]">✓</span> <span className="text-stone-300 font-medium"><strong>Cura e restaura</strong> os canais cavernosos do pênis</span></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Como funciona / Passos */}
+          <div className="mb-16 relative z-10 bg-stone-50 p-6 md:p-10 rounded-3xl border border-stone-100">
+            <h3 className="text-2xl font-black text-center mb-10 text-stone-900 uppercase tracking-tight">Como funciona a fabricação?</h3>
+            <div className="grid md:grid-cols-3 gap-8 relative">
+              {/* Linha conectora (Desktop) */}
+              <div className="hidden md:block absolute top-[44px] left-[15%] right-[15%] h-1.5 bg-stone-200 rounded-full z-0"></div>
+              
+              {/* Passo 1 */}
+              <div className="relative z-10 text-center flex flex-col items-center group">
+                <div className="w-24 h-24 bg-white border-4 border-stone-200 text-stone-400 group-hover:border-red-600 group-hover:text-red-600 rounded-full flex items-center justify-center text-4xl font-black mb-5 shadow-sm transition-all duration-300 relative">
+                  1
+                </div>
+                <h4 className="font-black text-lg text-stone-900 mb-2">Sua Avaliação</h4>
+                <p className="text-stone-600 text-sm px-2">Você responde as perguntas do nosso checklist para avaliarmos seu grau e sua fisiologia exata.</p>
+              </div>
+
+              {/* Passo 2 */}
+              <div className="relative z-10 text-center flex flex-col items-center group">
+                <div className="w-24 h-24 bg-white border-4 border-stone-200 text-stone-400 group-hover:border-red-600 group-hover:text-red-600 rounded-full flex items-center justify-center text-4xl font-black mb-5 shadow-sm transition-all duration-300 relative">
+                  2
+                </div>
+                <h4 className="font-black text-lg text-stone-900 mb-2">Manipulação no Laboratório</h4>
+                <p className="text-stone-600 text-sm px-2">Nossa equipe recebe seus dados e prepara os ingredientes <strong className="text-red-700">na dosagem isolada perfeita</strong> para o seu corpo.</p>
+              </div>
+
+              {/* Passo 3 */}
+              <div className="relative z-10 text-center flex flex-col items-center group">
+                <div className="w-24 h-24 bg-red-700 border-4 border-red-500 text-white rounded-full flex items-center justify-center text-4xl font-black mb-5 shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-transform duration-300 group-hover:scale-110 relative">
+                  3
+                </div>
+                <h4 className="font-black text-lg text-stone-900 mb-2">Tratamento Pronto!</h4>
+                <p className="text-stone-600 text-sm px-2">Sua fórmula exclusiva fica pronta na hora e nosso centro logístico a despacha discretamente para o seu endereço.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-black text-stone-900">Ingredientes Manipulados Para o Seu Perfil</h3>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-10 items-center relative z-10">
             {/* Image Placeholder */}
             <div className="relative group mx-auto w-full max-w-sm lg:max-w-none">
@@ -54,7 +135,7 @@ export default function VSL() {
                  className="rounded-3xl shadow-2xl w-full object-contain h-full min-h-[350px] border border-stone-50 bg-stone-50 p-6 transition-transform duration-500 group-hover:scale-[1.02]"
                />
                <div className="absolute inset-x-4 bottom-4 bg-gradient-to-r from-red-700 to-red-900 rounded-2xl flex items-center justify-center p-4 shadow-lg border border-red-500/30">
-                 <p className="text-white font-bold text-sm sm:text-base text-center tracking-wide">Fórmula Premium de Alta Absorção</p>
+                 <p className="text-white font-bold text-sm sm:text-base text-center tracking-wide">Dosagem Personalizada e Única</p>
                </div>
             </div>
 
@@ -64,8 +145,8 @@ export default function VSL() {
                   <Activity className="w-6 h-6" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">1 - Arginina</h3>
-                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Converte em óxido nítrico no corpo → relaxa e abre os vasos sanguíneos → limpa as artérias entupidas → aumenta o fluxo de sangue para o pênis → <strong className="text-stone-900">ereção mais rápida e duradoura</strong>.</p>
+                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">1 - Arginina <span className="text-red-600 text-sm italic font-medium">(Dose Calculada)</span></h3>
+                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Converte em óxido nítrico no corpo de acordo com a sua necessidade → relaxa os vasos → aumenta o fluxo de sangue → <strong className="text-stone-900">ereção mais rápida e duradoura</strong>.</p>
                 </div>
               </div>
               
@@ -74,8 +155,8 @@ export default function VSL() {
                   <ShieldCheck className="w-6 h-6" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">2 - Beta-Alanina</h3>
-                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Combate a acidez muscular → reduz o cansaço do pênis durante o ato → <strong className="text-stone-900">mantém a ereção mais firme</strong> e resistente por mais tempo.</p>
+                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">2 - Beta-Alanina <span className="text-red-600 text-sm italic font-medium">(Dose Certa para Você)</span></h3>
+                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Combate a acidez muscular e fadiga baseada no seu nível de esforço → <strong className="text-stone-900">mantém a ereção mais firme</strong> e resistente por mais tempo, sem falhas.</p>
                 </div>
               </div>
 
@@ -84,8 +165,8 @@ export default function VSL() {
                   <Droplet className="w-6 h-6" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">3 - Feno-grego</h3>
-                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Aumenta a testosterona livre no sangue → eleva a libido → melhora disposição geral → auxilia na massa muscular → <strong className="text-stone-900">faz o homem se sentir homem de novo.</strong></p>
+                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">3 - Feno-grego <span className="text-red-600 text-sm italic font-medium">(Ajuste Individual)</span></h3>
+                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Calculado para a sua idade para aumentar a testosterona livre ideal → eleva a libido → <strong className="text-stone-900">faz você se sentir com a vitalidade dos 20 anos.</strong></p>
                 </div>
               </div>
               
@@ -98,8 +179,8 @@ export default function VSL() {
                   <Activity className="w-6 h-6" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">4 - Piridoxina</h3>
-                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Produz serotonina e dopamina → melhora o sinal nervoso entre o cérebro e o pênis → aumenta a sensibilidade e o prazer → <strong className="text-stone-900">regula os hormônios masculinos.</strong></p>
+                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">4 - Piridoxina <span className="text-red-600 text-sm italic font-medium">(Dose Otimizada)</span></h3>
+                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Produz neurotransmissores exatos para o seu cérebro → aumenta o controle → <strong className="text-stone-900">regula os hormônios de forma adaptada ao seu perfil.</strong></p>
                 </div>
              </div>
              <div className="flex flex-col sm:flex-row items-start gap-4 bg-stone-50 p-5 sm:p-6 rounded-2xl hover:bg-red-50/50 transition-colors border border-stone-100 hover:border-red-100 h-full">
@@ -107,8 +188,8 @@ export default function VSL() {
                   <ShieldCheck className="w-6 h-6" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">5 - Complexo (A a Z)</h3>
-                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Manutenção geral do sistema → previne acúmulos nas artérias → garante que os ingredientes funcionem → <strong className="text-stone-900">protege o sistema a longo prazo.</strong></p>
+                  <h3 className="font-bold text-lg sm:text-xl text-stone-900 mb-2 font-heading tracking-tight">5 - Complexo Vitamínico <span className="text-red-600 text-sm italic font-medium">(Sob Medida)</span></h3>
+                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed">Vitaminas manipuladas para suprir apenas o que o seu corpo precisa hoje → <strong className="text-stone-900">potencializa os outros ingredientes.</strong></p>
                 </div>
              </div>
           </div>
