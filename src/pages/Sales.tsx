@@ -1,6 +1,17 @@
-import { ArrowRight, CheckCircle2, ShieldCheck, Timer, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ShieldCheck, Timer, Star, Activity, Plus } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { VideoPlayer } from '../components/VideoPlayer';
+
+const dataChart = [
+  { day: 0, performance: 20 },
+  { day: 3, performance: 35 },
+  { day: 7, performance: 50 },
+  { day: 14, performance: 75 },
+  { day: 30, performance: 90 },
+  { day: 90, performance: 100 },
+];
 
 const CUSTOMER_PHOTOS = [
   "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1cliente.png",
@@ -103,8 +114,120 @@ export default function Sales() {
               </div>
               <div className="flex items-center gap-3 text-green-900 bg-green-50 px-5 py-3 rounded-xl border border-green-200 font-semibold shadow-sm w-full sm:w-auto">
                 <ShieldCheck className="w-6 h-6 text-green-600 shrink-0" /> 
-                <span className="flex-1 text-center sm:text-left">Recomendado: <strong className="text-green-700">Tratamento de 3 meses para tratamento 100%</strong></span>
+                <span className="flex-1 text-center sm:text-left">Recomendado: <strong className="text-green-700">Tratamento de 3 meses para cura 100%</strong></span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Chart Section */}
+        <div className="bg-white rounded-3xl shadow-xl border border-stone-100 p-4 sm:p-6 md:p-10 mb-16 relative z-10 w-full overflow-hidden">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-black text-stone-900 mb-2 font-heading tracking-tight leading-tight">Projeção de Evolução com LibidMen</h2>
+            <p className="text-stone-600 font-medium text-sm md:text-base">Toque no gráfico para ver a evolução estimada das suas ereções:</p>
+          </div>
+          
+          <div className="h-64 sm:h-72 lg:h-80 w-full mt-6 -ml-4 sm:ml-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={dataChart} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorPerformance" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#dc2626" stopOpacity={0.5}/>
+                    <stop offset="95%" stopColor="#dc2626" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis 
+                  dataKey="day" 
+                  tickFormatter={(value) => `Dia ${value}`} 
+                  stroke="#a8a29e" 
+                  tick={{ fill: '#78716c', fontWeight: 600, fontSize: 12 }} 
+                  tickMargin={10}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <YAxis 
+                  tickFormatter={(value) => `${value}%`} 
+                  stroke="#a8a29e" 
+                  tick={{ fill: '#78716c', fontWeight: 600, fontSize: 12 }} 
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f5f5f4" />
+                <Tooltip 
+                  formatter={(value: any) => [`${value}% da Capacidade Total`, 'Potência Erétil']}
+                  labelFormatter={(label) => `Dia ${label} de uso`}
+                  contentStyle={{ 
+                    borderRadius: '1rem', 
+                    border: '1px solid #f5f5f4', 
+                    boxShadow: '0 10px 25px -4px rgba(0,0,0,0.1)', 
+                    fontWeight: 'bold',
+                    fontSize: '14px',
+                    padding: '12px'
+                  }}
+                  cursor={{ stroke: '#dc2626', strokeWidth: 1, strokeDasharray: '5 5' }}
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="performance" 
+                  stroke="#dc2626" 
+                  strokeWidth={4} 
+                  fillOpacity={1} 
+                  fill="url(#colorPerformance)"
+                  activeDot={{ r: 8, strokeWidth: 2, stroke: '#fff', fill: '#dc2626' }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 text-center pt-8 border-t border-stone-100">
+             <div className="bg-stone-50 p-4 rounded-2xl border border-stone-100">
+                <div className="font-black text-red-500 text-xl md:text-2xl">1-7 Dias</div>
+                <div className="text-sm font-medium text-stone-600 mt-2">Aumento claro da energia física e reacendimento da libido</div>
+             </div>
+             <div className="bg-stone-50 p-4 rounded-2xl border border-stone-100">
+                <div className="font-black text-red-600 text-xl md:text-2xl">15-30 Dias</div>
+                <div className="text-sm font-medium text-stone-600 mt-2">Ereções mais firmes ocorrendo de forma mais consistente</div>
+             </div>
+             <div className="bg-red-50 p-4 rounded-2xl border border-red-100 shadow-sm relative overflow-hidden transform sm:-translate-y-2">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-red-200 rounded-full blur-xl -mr-4 -mt-4"></div>
+                <div className="relative z-10 font-black text-red-700 text-xl md:text-2xl">90 Dias</div>
+                <div className="relative z-10 text-sm font-bold text-red-800 mt-2">Cura e restauração de 100% da autonomia do pênis</div>
+             </div>
+          </div>
+        </div>
+
+        {/* Como funciona / Passos */}
+        <div className="mb-16 relative z-10 bg-stone-100/50 p-6 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
+          <h3 className="text-2xl md:text-3xl font-black text-center mb-2 text-stone-900 tracking-tight uppercase">Como funciona a manipulação e entrega?</h3>
+          <p className="text-center text-stone-600 font-medium mb-10">O processo para que você receba um composto único na sua casa</p>
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            {/* Linha conectora (Desktop) */}
+            <div className="hidden md:block absolute top-[44px] left-[15%] right-[15%] h-1.5 bg-stone-200 rounded-full z-0"></div>
+            
+            {/* Passo 1 */}
+            <div className="relative z-10 text-center flex flex-col items-center group">
+              <div className="w-24 h-24 bg-white border-4 border-green-500 text-green-600 rounded-full flex items-center justify-center text-4xl font-black mb-5 shadow-sm relative">
+                <CheckCircle2 strokeWidth={3} className="w-10 h-10" />
+              </div>
+              <h4 className="font-black text-lg text-stone-900 mb-2">1. Avaliação Concluída</h4>
+              <p className="text-stone-600 text-sm px-2 font-medium">Você já respondeu o checklist e nós já sabemos as dosagens que seu corpo precisa.</p>
+            </div>
+
+            {/* Passo 2 */}
+            <div className="relative z-10 text-center flex flex-col items-center group">
+              <div className="w-24 h-24 bg-white border-4 border-stone-300 text-stone-400 group-hover:border-red-600 group-hover:text-red-600 rounded-full flex items-center justify-center text-4xl font-black mb-5 shadow-sm transition-all duration-300 relative">
+                <Activity strokeWidth={3} className="w-10 h-10" />
+              </div>
+              <h4 className="font-black text-lg text-stone-900 mb-2">2. Manipulação Laboratorial</h4>
+              <p className="text-stone-600 text-sm px-2 font-medium">Ao confirmar o pedido, nossa equipe manipula <strong className="text-red-700">os ingredientes na dosagem exclusiva</strong> para você.</p>
+            </div>
+
+            {/* Passo 3 */}
+            <div className="relative z-10 text-center flex flex-col items-center group">
+              <div className="w-24 h-24 bg-red-700 border-4 border-red-500 text-white rounded-full flex items-center justify-center text-4xl font-black mb-5 shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-transform duration-300 group-hover:scale-110 relative">
+                3
+              </div>
+              <h4 className="font-black text-lg text-stone-900 mb-2">3. Entrega Super Rápida</h4>
+              <p className="text-stone-600 text-sm px-2 font-medium">Sua fórmula é despachada discretamente. <strong className="text-stone-900 block mt-1">Prazo de 3 a 5 dias úteis, no máximo, para todo o Brasil!</strong></p>
             </div>
           </div>
         </div>
@@ -209,6 +332,21 @@ export default function Sales() {
 
         </div>
 
+        {/* Video Testimonial Antes do Carrossel */}
+        <div className="text-center mb-10 pt-10 border-t border-stone-200">
+          <h2 className="text-3xl md:text-5xl font-black text-stone-900 mb-4 font-heading tracking-tight">Veja O Que Eles Estão Dizendo</h2>
+          <p className="text-stone-600 sm:text-lg max-w-2xl mx-auto font-medium mb-8">Nossos clientes compartilham seus resultados com o tratamento LibidMen</p>
+
+          <div className="max-w-sm mx-auto bg-black rounded-lg shadow-2xl overflow-hidden mb-16 border-4 border-stone-800">
+            <VideoPlayer 
+              playerId="69f7eec8f44bf91afda981d5"
+              smartPlayerId="ceaefeeb-feef-4b52-8911-9ec9de0d5b6b"
+              scriptSrc="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js"
+              aspectRatioPadding="180%"
+            />
+          </div>
+        </div>
+
         {/* Carousel Real Customers */}
         <div className="mb-24 relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] max-w-4xl h-full bg-gradient-to-r from-red-50 to-orange-50 rounded-[3rem] -z-10 -skew-y-2 opacity-50"></div>
@@ -253,6 +391,27 @@ export default function Sales() {
         </div>
 
       </div>
+
+      {/* FOOTER */}
+      <footer className="w-full bg-stone-900 text-stone-400 py-12 px-4 text-xs font-medium text-center border-t border-stone-800 mt-16">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <p className="leading-relaxed opacity-80 max-w-3xl mx-auto">
+            Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook / Meta Platforms, Inc. Depois que você sair do Facebook, a responsabilidade não é deles e sim do nosso site. Fazemos todos os esforços para indicar claramente e apresentar dados reais do nosso produto de forma transparente.
+          </p>
+          <p className="leading-relaxed opacity-80 max-w-3xl mx-auto">
+            "FACEBOOK" é uma marca comercial registrada da FACEBOOK, Inc. e as diretrizes e regras são cuidadosamente respeitadas. Não vendemos seu e-mail ou qualquer informação para terceiros. Os resultados variam de pessoa para pessoa e o uso deste produto não substitui acompanhamento médico adequado.
+          </p>
+          <p className="opacity-80">
+            Pirataria é crime, a venda só pode ser realizada através deste site oficial. <br/>
+            © {new Date().getFullYear()} Vigor Suplementos Farmaceutica - CNPJ: 40.170.238/0001-80 - Todos os direitos reservados.
+          </p>
+          <div className="flex justify-center flex-wrap gap-4 pt-4 text-[10px] text-stone-500">
+            <a href="#" className="hover:text-stone-300">Termos de Uso</a>
+            <span>|</span>
+            <a href="#" className="hover:text-stone-300">Políticas de Privacidade</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

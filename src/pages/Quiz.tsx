@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, ShieldAlert } from 'lucide-react';
+import { CheckCircle2, ShieldAlert, ArrowRight } from 'lucide-react';
 
 const QUESTIONS = [
   {
@@ -62,6 +62,7 @@ export default function Quiz() {
   const [isCalculating, setIsCalculating] = useState(false);
   const [calcStep, setCalcStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
+  const [multiSelections, setMultiSelections] = useState<string[]>([]);
 
   // Simulation of calculation
   useEffect(() => {
@@ -82,9 +83,40 @@ export default function Quiz() {
 
   const handleStart = () => setStarted(true);
 
+  const isMultiSelect = currentQuestion === 3 || currentQuestion === 4;
+
   const handleOptionSelect = (option: string) => {
-    const newAnswers = [...answers, option];
+    if (isMultiSelect) {
+      if (option === "Não possuo nenhuma dessas condições" || option === "Nunca usei nada") {
+        setMultiSelections([option]);
+        return;
+      }
+      
+      setMultiSelections(prev => {
+        // Remove exclusive options if they were selected
+        let updated = prev.filter(p => p !== "Não possuo nenhuma dessas condições" && p !== "Nunca usei nada");
+        
+        if (updated.includes(option)) {
+          return updated.filter(o => o !== option);
+        } else {
+          return [...updated, option];
+        }
+      });
+      return;
+    }
+
+    proceedNext(option);
+  };
+
+  const handleMultiSubmit = () => {
+    if (multiSelections.length === 0) return;
+    proceedNext(multiSelections.join(", "));
+  };
+
+  const proceedNext = (answerString: string) => {
+    const newAnswers = [...answers, answerString];
     setAnswers(newAnswers);
+    setMultiSelections([]); // reset for next if any
 
     if (currentQuestion < QUESTIONS.length - 1) {
       setCurrentQuestion(prev => prev + 1);
@@ -122,17 +154,20 @@ export default function Quiz() {
   if (!started) {
     return (
       <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-20 p-6 text-center">
-        <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg border border-stone-100 px-6 py-10 md:p-12">
-          <ShieldAlert className="w-16 h-16 text-yellow-500 mx-auto mb-6" />
-          <h1 className="text-3xl font-bold font-heading mb-4 text-stone-900">Fórmula Personalizada LibidMen</h1>
-          <p className="text-stone-600 text-lg mb-8 leading-relaxed">
+        <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg border border-stone-100 px-6 py-10 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-red-50 rounded-full blur-[60px] opacity-60 pointer-events-none"></div>
+          
+          <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1pote.png" alt="LibidMen" className="w-32 h-auto object-contain mx-auto mb-6 drop-shadow-xl relative z-10" />
+          
+          <h1 className="text-3xl font-bold font-heading mb-4 text-stone-900 relative z-10">Fórmula Personalizada LibidMen</h1>
+          <p className="text-stone-600 text-lg mb-8 leading-relaxed relative z-10">
             Responda com honestidade. Essas informações são confidenciais e serão usadas exclusivamente para calcular a proporção ideal de cada ingrediente da sua fórmula.
           </p>
           <button 
             onClick={handleStart}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl text-lg transition-colors shadow-lg hover:shadow-red-600/30"
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl text-lg transition-colors shadow-lg hover:shadow-red-600/30 relative z-10 flex items-center justify-center gap-2"
           >
-            Começar Análise →
+            Começar Análise <ArrowRight className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -162,22 +197,54 @@ export default function Quiz() {
         <div className="bg-white rounded-[2rem] shadow-xl border border-stone-100 p-6 sm:p-10 mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
           
-          <h2 className="text-2xl sm:text-3xl font-black text-stone-900 mb-8 leading-tight font-heading relative z-10">{q.title}</h2>
+          <h2 className="text-2xl sm:text-3xl font-black text-stone-900 mb-8 leading-tight font-heading relative z-10">
+            {q.title}
+            {isMultiSelect && <span className="block text-sm font-medium text-stone-500 mt-2">(Selecione todas que se aplicam)</span>}
+          </h2>
           
           <div className="space-y-3 relative z-10">
-            {q.options.map((opt, i) => (
-              <button
-                key={i}
-                onClick={() => handleOptionSelect(opt)}
-                className="w-full text-left px-5 py-4 sm:px-6 sm:py-5 rounded-2xl border-2 border-stone-200 hover:border-red-600 hover:bg-neutral-50 active:bg-red-50 active:border-red-600 focus:border-red-600 focus:bg-red-50 text-stone-800 font-bold sm:text-lg transition-all shadow-sm flex items-center justify-between group"
-              >
-                <span>{opt}</span>
-                <span className="w-6 h-6 rounded-full border-2 border-stone-300 group-hover:border-red-600 flex items-center justify-center flex-shrink-0">
-                  <span className="w-2.5 h-2.5 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                </span>
-              </button>
-            ))}
+            {q.options.map((opt, i) => {
+              const isSelected = isMultiSelect && multiSelections.includes(opt);
+              return (
+                <button
+                  key={i}
+                  onClick={() => handleOptionSelect(opt)}
+                  className={`w-full text-left px-5 py-4 sm:px-6 sm:py-5 rounded-2xl border-2 transition-all shadow-sm flex items-center justify-between group
+                    ${isSelected 
+                      ? 'border-red-600 bg-red-50 text-stone-900' 
+                      : 'border-stone-200 hover:border-red-600 hover:bg-neutral-50 text-stone-800'} 
+                    font-bold sm:text-lg`}
+                >
+                  <span>{opt}</span>
+                  {isMultiSelect ? (
+                    <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors
+                      ${isSelected ? 'border-red-600 bg-red-600' : 'border-stone-300 group-hover:border-red-400'}`}>
+                      {isSelected && <CheckCircle2 className="w-4 h-4 text-white" strokeWidth={3} />}
+                    </div>
+                  ) : (
+                    <span className="w-6 h-6 rounded-full border-2 border-stone-300 group-hover:border-red-600 flex items-center justify-center flex-shrink-0">
+                      <span className="w-2.5 h-2.5 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
+
+          {isMultiSelect && (
+            <div className="mt-8 relative z-10">
+              <button
+                onClick={handleMultiSubmit}
+                disabled={multiSelections.length === 0}
+                className={`w-full py-4 rounded-xl text-lg font-bold transition-all flex items-center justify-center gap-2
+                  ${multiSelections.length > 0 
+                    ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-red-600/30' 
+                    : 'bg-stone-200 text-stone-400 cursor-not-allowed'}`}
+              >
+                Continuar <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Reason footer */}
