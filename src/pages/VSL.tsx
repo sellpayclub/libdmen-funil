@@ -60,7 +60,7 @@ export default function VSL() {
                 <div className="bg-stone-200 p-2 rounded-full px-4 text-stone-600 font-black shrink-0">OUTROS</div>
                 <div className="flex-1 text-center sm:text-left">
                   <h3 className="text-lg font-bold text-stone-500 leading-tight mb-3">Medicamentos e Suplementos Genéricos</h3>
-                  <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/Logo%20feminino%20delicado%20borboleta.png" alt="Outros Suplementos" className="w-48 md:w-56 h-auto object-contain mx-auto sm:mx-0 opacity-60" />
+                  <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/potesoutros.png" alt="Outros Suplementos" className="w-48 md:w-56 h-auto object-contain mx-auto sm:mx-0 opacity-60" />
                 </div>
               </div>
               <ul className="space-y-4">
