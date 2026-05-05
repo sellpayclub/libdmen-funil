@@ -208,7 +208,7 @@ export default function VSLWhite() {
           </p>
           <p className="opacity-80">
             Pirataria é crime, a venda só pode ser realizada através deste site oficial. <br/>
-            © {new Date().getFullYear()} Todos os direitos reservados.
+            © {new Date().getFullYear()} Vigor Suplementos Farmaceutica - CNPJ: 40.170.238/0001-80 - Todos os direitos reservados.
           </p>
           <div className="flex justify-center flex-wrap gap-4 pt-4 text-[10px] text-stone-500">
             <a href="#" className="hover:text-stone-300">Termos de Uso</a>

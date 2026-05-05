@@ -4,7 +4,7 @@ import { VideoPlayer } from '../components/VideoPlayer';
 
 export default function VSL() {
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen bg-stone-50 pb-0">
       {/* Top Banner */}
       <div className="bg-red-700 text-white text-center py-3 px-4 font-medium text-sm">
         Atenção: Assista ao vídeo abaixo com som ligado e veja como restaurar sua função natural.
@@ -56,9 +56,12 @@ export default function VSL() {
           <div className="grid md:grid-cols-2 gap-6 mb-16 relative z-10 w-full">
             {/* Outros */}
             <div className="bg-stone-50 border border-stone-200 rounded-3xl p-6 sm:p-8 shadow-sm">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-stone-200 p-2 rounded-full px-4 text-stone-600 font-black">OUTROS</div>
-                <h3 className="text-lg font-bold text-stone-500 leading-tight">Medicamentos e Suplementos Genéricos</h3>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6">
+                <div className="bg-stone-200 p-2 rounded-full px-4 text-stone-600 font-black shrink-0">OUTROS</div>
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-lg font-bold text-stone-500 leading-tight mb-3">Medicamentos e Suplementos Genéricos</h3>
+                  <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/Logo%20feminino%20delicado%20borboleta.png" alt="Outros Suplementos" className="w-48 md:w-56 h-auto object-contain mx-auto sm:mx-0 opacity-60" />
+                </div>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3"><span className="text-stone-400 font-bold text-xl mt-[-2px]">❌</span> <span className="text-stone-600 font-medium">Oferecem <strong>risco direto</strong> à sua saúde cardiovascular</span></li>
@@ -72,9 +75,12 @@ export default function VSL() {
             {/* LibidMen */}
             <div className="bg-gradient-to-b from-stone-900 to-black text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-stone-800 transform md:-translate-y-2">
               <div className="absolute top-0 right-0 w-48 h-48 bg-red-600 rounded-full blur-[70px] opacity-20 pointer-events-none"></div>
-              <div className="flex items-center gap-3 mb-6 relative z-10">
-                <div className="bg-red-600 p-2 rounded-full px-4 text-white font-black shadow-lg shadow-red-600/30 tracking-wide">LIBIDMEN</div>
-                <h3 className="text-lg font-bold text-stone-200">Tratamento Definitivo</h3>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6 relative z-10">
+                <div className="bg-red-600 p-2 rounded-full px-4 text-white font-black shadow-lg shadow-red-600/30 tracking-wide shrink-0">LIBIDMEN</div>
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-lg font-bold text-stone-200 mb-3">Tratamento Definitivo</h3>
+                  <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1pote.png" alt="LibidMen" className="w-56 md:w-64 lg:w-72 h-auto object-contain mx-auto sm:mx-0 drop-shadow-2xl" />
+                </div>
               </div>
               <ul className="space-y-4 relative z-10">
                 <li className="flex items-start gap-3"><span className="text-green-500 font-bold text-xl mt-[-2px]">✓</span> <span className="text-white font-bold">100% Natural e Seguro <span className="text-stone-400 text-sm font-medium block sm:inline">(sem risco cardíaco)</span></span></li>
@@ -284,10 +290,26 @@ export default function VSL() {
 
       </div>
       
-      {/* Dev Link to Page 2 */}
-      <div className="w-full text-center py-6 mt-8">
-        <Link to="/white" className="text-stone-400 text-xs hover:text-stone-600 underline">Acessar Página 02 (White)</Link>
-      </div>
+      {/* FOOTER & FACEBOOK DISCLAIMERS */}
+      <footer className="w-full bg-stone-900 text-stone-400 py-12 px-4 text-xs font-medium text-center border-t border-stone-800 mt-16">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <p className="leading-relaxed opacity-80 max-w-3xl mx-auto">
+            Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook / Meta Platforms, Inc. Depois que você sair do Facebook, a responsabilidade não é deles e sim do nosso site. Fazemos todos os esforços para indicar claramente e apresentar dados reais do nosso produto de forma transparente.
+          </p>
+          <p className="leading-relaxed opacity-80 max-w-3xl mx-auto">
+            "FACEBOOK" é uma marca comercial registrada da FACEBOOK, Inc. e as diretrizes e regras são cuidadosamente respeitadas. Não vendemos seu e-mail ou qualquer informação para terceiros. Os resultados variam de pessoa para pessoa e o uso deste produto não substitui acompanhamento médico adequado.
+          </p>
+          <p className="opacity-80">
+            Pirataria é crime, a venda só pode ser realizada através deste site oficial. <br/>
+            © {new Date().getFullYear()} Vigor Suplementos Farmaceutica - CNPJ: 40.170.238/0001-80 - Todos os direitos reservados.
+          </p>
+          <div className="flex justify-center flex-wrap gap-4 pt-4 text-[10px] text-stone-500">
+            <a href="#" className="hover:text-stone-300">Termos de Uso</a>
+            <span>|</span>
+            <a href="#" className="hover:text-stone-300">Políticas de Privacidade</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
