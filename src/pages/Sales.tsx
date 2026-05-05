@@ -19,7 +19,13 @@ const CUSTOMER_PHOTOS = [
   "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/4cliente.png",
   "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/5cliente.jpg",
   "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/6cliente.jpg",
-  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/7cliente.jpg"
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/7cliente.jpg",
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1depoclientes.jpg",
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/2depoclientes.jpg",
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/3depoclientes.jpg",
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/4depoclientes.jpg",
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/5depoclientes.jpg",
+  "https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/6depoclientes.jpg"
 ];
 
 export default function Sales() {
