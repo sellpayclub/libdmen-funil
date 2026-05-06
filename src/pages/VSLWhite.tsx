@@ -1,6 +1,12 @@
 import { ShieldCheck, Activity, Droplet } from 'lucide-react';
+import { trackEvent, FunnelEvent } from '../lib/analytics';
+import { useEffect } from 'react';
 
 export default function VSLWhite() {
+  useEffect(() => {
+    trackEvent(FunnelEvent.VSL_WHITE_VIEW);
+  }, []);
+
   return (
     <div className="min-h-screen bg-stone-50 pb-10 flex flex-col items-center">
       {/* Top Banner */}

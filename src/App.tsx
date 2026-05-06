@@ -8,6 +8,7 @@ import VSL from './pages/VSL';
 import VSLWhite from './pages/VSLWhite';
 import Quiz from './pages/Quiz';
 import Sales from './pages/Sales';
+import Admin from './pages/Admin';
 
 export default function App() {
   // Flag global para forçar a renderização da página White (ideal para o Cloudflare Worker em SPAs)
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/white" element={<VSLWhite />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/checkout" element={<Sales />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Navigate to="/libmen" replace />} />
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,36 @@
+{
+  "entities": {
+    "AnalyticsEvent": {
+      "title": "Analytics Event",
+      "description": "An event tracking user progression through the funnel",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string" },
+        "eventName": { "type": "string" },
+        "timestamp": { "type": "string" }, 
+        "details": { "type": "string" }
+      },
+      "required": ["sessionId", "eventName", "timestamp"]
+    },
+    "AdminUser": {
+      "title": "Admin User",
+      "description": "Stores users who are admins",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/analytics_events/{eventId}": {
+      "schema": { "$ref": "#/entities/AnalyticsEvent" },
+      "description": "Stores all funnel events"
+    },
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Admin privileges mapping"
+    }
+  }
+}

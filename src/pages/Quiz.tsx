@@ -1,37 +1,50 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, ShieldAlert, ArrowRight } from 'lucide-react';
+import { trackEvent, FunnelEvent } from '../lib/analytics';
 
 const QUESTIONS = [
   {
     title: "Qual é a sua idade?",
     options: ["35 a 42 anos", "43 a 50 anos", "51 a 58 anos", "59 a 65 anos", "Acima de 65 anos"],
     reason: "A idade é o principal fator para calcular a dose de Arginina e Feno-grego",
-    progress: 14
+    progress: 10
   },
   {
     title: "Há quanto tempo você percebe dificuldade para ter ou manter ereção?",
     options: ["Menos de 6 meses", "Entre 6 meses e 1 ano", "Entre 1 e 3 anos", "Mais de 3 anos", "Sempre tive mas piorou recentemente"],
     reason: "O tempo de disfunção determina o nível de obstrução nas artérias penianas e a concentração necessária de Beta-Alanina",
-    progress: 28
+    progress: 20
   },
   {
     title: "Como você descreveria sua ereção hoje?",
     options: ["Consigo ter ereção mas ela não dura", "Consigo ter ereção mas ela é fraca", "Raramente consigo ter ereção completa", "Quase não consigo ter ereção", "Tenho ereção mas perco no meio do ato"],
     reason: "Esse dado calibra a dose de Piridoxina responsável pelo sinal nervoso entre o cérebro e o pênis",
-    progress: 42
+    progress: 30
   },
   {
-    title: "Você possui alguma dessas condições?",
-    options: ["Diabetes tipo 2", "Pressão alta", "Colesterol elevado", "Sobrepeso ou obesidade", "Não possuo nenhuma dessas condições"],
+    title: "Você já foi diagnosticado com HPB (Hiperplasia Prostática Benigna)?",
+    options: ["🙏 Sim, ja fui diagnosticado.", "⌛ Não, mas estou desconfiado."],
+    reason: "O aumento da próstata compartilha a mesma causa raiz da disfunção erétil: baixa circulação pélvica.",
+    progress: 40
+  },
+  {
+    title: "Você tem algum sintoma urinário?",
+    options: ["Acordo à noite para urinar", "Jato fraco ou incompleto", "Ardência ao urinar", "Não tenho sintomas"],
+    reason: "Sintomas urinários indicam circulação comprometida na mesma região responsável pela ereção. Essa resposta ajusta sua dose de Arginina para tratar os dois problemas ao mesmo tempo.",
+    progress: 50
+  },
+  {
+    title: "Você tem alguma dessas condições?",
+    options: ["Tenho obesidade ou sobrepeso", "Tenho diabetes tipo 2", "Tenho distúrbios hormonais", "Tenho pressão alta (hipertensão)", "Não tenho nenhuma dessas condições"],
     reason: "Condições metabólicas afetam diretamente a absorção dos ingredientes e exigem ajuste na concentração de Vitaminas do complexo B",
-    progress: 57
+    progress: 60
   },
   {
     title: "Você já usou ou usa algum desses produtos?",
     options: ["Viagra ou Cialis regularmente", "Suplementos naturais sem resultado", "Tadalafila sob prescrição", "Nunca usei nada", "Já usei de tudo e nada funcionou"],
     reason: "O histórico de uso de medicamentos determina o nível de dependência química e a dose necessária para reativar a produção natural de óxido nítrico",
-    progress: 71
+    progress: 70
   },
   {
     title: "Como está sua libido — sua vontade de ter relações?",
@@ -81,20 +94,23 @@ export default function Quiz() {
     }
   }, [isCalculating, calcStep, navigate, answers]);
 
-  const handleStart = () => setStarted(true);
+  const handleStart = () => {
+    setStarted(true);
+    trackEvent(FunnelEvent.QUIZ_START);
+  };
 
-  const isMultiSelect = currentQuestion === 3 || currentQuestion === 4;
+  const isMultiSelect = currentQuestion === 5 || currentQuestion === 6;
 
   const handleOptionSelect = (option: string) => {
     if (isMultiSelect) {
-      if (option === "Não possuo nenhuma dessas condições" || option === "Nunca usei nada") {
+      if (option === "Não tenho nenhuma dessas condições" || option === "Nunca usei nada") {
         setMultiSelections([option]);
         return;
       }
       
       setMultiSelections(prev => {
         // Remove exclusive options if they were selected
-        let updated = prev.filter(p => p !== "Não possuo nenhuma dessas condições" && p !== "Nunca usei nada");
+        let updated = prev.filter(p => p !== "Não tenho nenhuma dessas condições" && p !== "Nunca usei nada");
         
         if (updated.includes(option)) {
           return updated.filter(o => o !== option);
@@ -123,13 +139,14 @@ export default function Quiz() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setIsCalculating(true);
+      trackEvent(FunnelEvent.QUIZ_COMPLETE, JSON.stringify(newAnswers));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   if (isCalculating) {
     return (
-      <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center px-4 sm:px-6 py-6 text-center">
         <div className="bg-white rounded-2xl shadow-lg border border-stone-100 p-8 w-full max-w-md">
            <div className="w-16 h-16 border-4 border-stone-200 border-t-red-600 rounded-full animate-spin mx-auto mb-6"></div>
            <h2 className="text-2xl font-bold font-heading text-stone-900 mb-6">Calculando sua fórmula personalizada...</h2>
@@ -153,8 +170,8 @@ export default function Quiz() {
 
   if (!started) {
     return (
-      <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-20 p-6 text-center">
-        <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg border border-stone-100 px-6 py-10 md:p-12 relative overflow-hidden">
+      <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-20 px-3 sm:px-6 py-6 text-center">
+        <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg border border-stone-100 px-4 py-8 md:p-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-48 h-48 bg-red-50 rounded-full blur-[60px] opacity-60 pointer-events-none"></div>
           
           <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1pote.png" alt="LibidMen" className="w-32 h-auto object-contain mx-auto mb-6 drop-shadow-xl relative z-10" />
@@ -177,10 +194,10 @@ export default function Quiz() {
   const q = QUESTIONS[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-12 p-6">
+    <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-8 sm:pt-12 px-0 sm:px-6 py-0 sm:py-6">
       <div className="w-full max-w-xl">
         {/* Progress Bar */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8 px-4 sm:px-0">
            <div className="flex justify-between text-sm font-medium text-stone-500 mb-2">
              <span>Pergunta {currentQuestion + 1} de {QUESTIONS.length}</span>
              <span>{q.progress}%</span>
@@ -194,13 +211,16 @@ export default function Quiz() {
         </div>
 
         {/* Question */}
-        <div className="bg-white rounded-[2rem] shadow-xl border border-stone-100 p-6 sm:p-10 mb-8 relative overflow-hidden">
+        <div className="bg-white rounded-none sm:rounded-[2rem] shadow-none sm:shadow-xl border-y sm:border border-stone-200 px-5 py-8 sm:p-10 mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
           
-          <h2 className="text-2xl sm:text-3xl font-black text-stone-900 mb-8 leading-tight font-heading relative z-10">
+          <h2 className="text-2xl sm:text-3xl font-black text-stone-900 leading-tight font-heading relative z-10 mb-2">
             {q.title}
-            {isMultiSelect && <span className="block text-sm font-medium text-stone-500 mt-2">(Selecione todas que se aplicam)</span>}
           </h2>
+          {(q as any).subtitle && (
+            <p className="text-stone-500 font-medium mb-6 relative z-10">{(q as any).subtitle}</p>
+          )}
+          {isMultiSelect && <span className="block text-sm font-bold text-red-600 mb-6 relative z-10">(Selecione todas que se aplicam)</span>}
           
           <div className="space-y-3 relative z-10">
             {q.options.map((opt, i) => {
