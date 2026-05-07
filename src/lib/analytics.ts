@@ -1,6 +1,3 @@
-import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
-import { db } from './firebase';
-
 export enum FunnelEvent {
   VSL_VIEW = 'VSL_VIEW',
   QUIZ_START = 'QUIZ_START',
@@ -24,15 +21,8 @@ function getOrSetSessionId(): string {
 export async function trackEvent(eventName: FunnelEvent, details?: string) {
   try {
     const sessionId = getOrSetSessionId();
-    const eventId = crypto.randomUUID();
-    const data = {
-      sessionId,
-      eventName,
-      timestamp: serverTimestamp(),
-      ...(details ? { details } : {})
-    };
-    
-    await setDoc(doc(db, 'analytics_events', eventId), data);
+    // Firebase analytics removed
+    console.log("Analytics event tracked:", eventName, details, "Session:", sessionId);
   } catch (error) {
     console.error("Failed to track event:", error);
   }
