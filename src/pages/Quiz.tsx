@@ -5,6 +5,14 @@ import { trackEvent, FunnelEvent } from '../lib/analytics';
 
 const QUESTIONS = [
   {
+    title: "Qual é o seu primeiro nome?",
+    type: "input",
+    options: [],
+    placeholder: "Digite seu nome...",
+    reason: "Sua fórmula será 100% personalizada e precisa estar vinculada ao seu nome.",
+    progress: 5
+  },
+  {
     title: "Qual é a sua idade?",
     options: ["35 a 42 anos", "43 a 50 anos", "51 a 58 anos", "59 a 65 anos", "Acima de 65 anos"],
     reason: "A idade é o principal fator para calcular a dose de Arginina e Feno-grego",
@@ -36,7 +44,7 @@ const QUESTIONS = [
   },
   {
     title: "Você tem alguma dessas condições?",
-    options: ["Tenho obesidade ou sobrepeso", "Tenho diabetes tipo 2", "Tenho distúrbios hormonais", "Tenho pressão alta (hipertensão)", "Não tenho nenhuma dessas condições"],
+    options: ["Tenho obesidade ou sobrepeso", "Tenho diabetes tipo 2", "Tenho distúrbios hormonais", "Tenho pressão alta (hipertensão)", "Colesterol elevado", "Não tenho nenhuma dessas condições"],
     reason: "Condições metabólicas afetam diretamente a absorção dos ingredientes e exigem ajuste na concentração de Vitaminas do complexo B",
     progress: 60
   },
@@ -76,6 +84,7 @@ export default function Quiz() {
   const [calcStep, setCalcStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [multiSelections, setMultiSelections] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState("");
 
   // Simulation of calculation
   useEffect(() => {
@@ -99,7 +108,12 @@ export default function Quiz() {
     trackEvent(FunnelEvent.QUIZ_START);
   };
 
-  const isMultiSelect = currentQuestion === 5 || currentQuestion === 6;
+  const handleInputSubmit = () => {
+    if (inputValue.trim().length < 2) return;
+    proceedNext(inputValue.trim());
+  };
+
+  const isMultiSelect = currentQuestion === 6 || currentQuestion === 7;
 
   const handleOptionSelect = (option: string) => {
     if (isMultiSelect) {
@@ -133,6 +147,7 @@ export default function Quiz() {
     const newAnswers = [...answers, answerString];
     setAnswers(newAnswers);
     setMultiSelections([]); // reset for next if any
+    setInputValue(""); // reset input
 
     if (currentQuestion < QUESTIONS.length - 1) {
       setCurrentQuestion(prev => prev + 1);
@@ -170,21 +185,27 @@ export default function Quiz() {
 
   if (!started) {
     return (
-      <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-20 px-3 sm:px-6 py-6 text-center">
-        <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg border border-stone-100 px-4 py-8 md:p-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-red-50 rounded-full blur-[60px] opacity-60 pointer-events-none"></div>
+      <div className="min-h-screen bg-stone-50 flex flex-col items-center pt-8 sm:pt-12 px-3 sm:px-6 py-6 text-center">
+        <div className="max-w-xl w-full bg-white rounded-3xl shadow-2xl border border-stone-100 px-5 py-10 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-[80px] opacity-60 pointer-events-none"></div>
           
-          <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1pote.png" alt="LibidMen" className="w-32 h-auto object-contain mx-auto mb-6 drop-shadow-xl relative z-10" />
+          <div className="mb-6 inline-flex items-center gap-2 bg-yellow-100/80 border border-yellow-200/50 text-yellow-800 px-4 py-2 rounded-full text-sm font-bold relative z-10 drop-shadow-sm">
+            <span className="text-lg">⚠️</span> Seus dados são 100% confidenciais
+          </div>
+
+          <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1pote.png" alt="LibidMen" className="w-48 sm:w-64 h-auto object-contain mx-auto mb-8 drop-shadow-2xl relative z-10" />
           
-          <h1 className="text-3xl font-bold font-heading mb-4 text-stone-900 relative z-10">Fórmula Personalizada LibidMen</h1>
-          <p className="text-stone-600 text-lg mb-8 leading-relaxed relative z-10">
-            Responda com honestidade. Essas informações são confidenciais e serão usadas exclusivamente para calcular a proporção ideal de cada ingrediente da sua fórmula.
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading mb-4 text-stone-900 relative z-10 tracking-tight leading-tight">
+            Descubra em 1 minuto se suas artérias penianas estão entupidas — e qual é a fórmula correta para o seu caso!
+          </h1>
+          <p className="text-stone-600 sm:text-lg mb-8 leading-relaxed relative z-10 font-medium">
+            <strong className="text-stone-900">Mais de 12.500 homens já calcularam sua fórmula personalizada.</strong> Responda as perguntas abaixo com honestidade para que nosso sistema identifique seu nível de obstrução e calcule a concentração ideal de cada ingrediente.
           </p>
           <button 
             onClick={handleStart}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl text-lg transition-colors shadow-lg hover:shadow-red-600/30 relative z-10 flex items-center justify-center gap-2"
+            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-full text-lg transition-all shadow-xl hover:shadow-red-600/40 relative z-10 flex items-center justify-center gap-2 uppercase tracking-wide hover:scale-[1.02]"
           >
-            Começar Análise <ArrowRight className="w-5 h-5" />
+            👇 Começar minha análise agora
           </button>
         </div>
       </div>
@@ -223,32 +244,59 @@ export default function Quiz() {
           {isMultiSelect && <span className="block text-sm font-bold text-red-600 mb-6 relative z-10">(Selecione todas que se aplicam)</span>}
           
           <div className="space-y-3 relative z-10">
-            {q.options.map((opt, i) => {
-              const isSelected = isMultiSelect && multiSelections.includes(opt);
-              return (
+            {q.type === 'input' ? (
+              <div className="space-y-4">
+                <input 
+                  type="text"
+                  placeholder={(q as any).placeholder}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="w-full px-5 py-4 sm:px-6 sm:py-5 rounded-2xl border-2 border-stone-200 focus:border-red-600 focus:ring-4 focus:ring-red-100 transition-all font-medium sm:text-lg outline-none"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && inputValue.trim().length > 1) {
+                      handleInputSubmit();
+                    }
+                  }}
+                />
                 <button
-                  key={i}
-                  onClick={() => handleOptionSelect(opt)}
-                  className={`w-full text-left px-5 py-4 sm:px-6 sm:py-5 rounded-2xl border-2 transition-all shadow-sm flex items-center justify-between group
-                    ${isSelected 
-                      ? 'border-red-600 bg-red-50 text-stone-900' 
-                      : 'border-stone-200 hover:border-red-600 hover:bg-neutral-50 text-stone-800'} 
-                    font-bold sm:text-lg`}
+                  onClick={handleInputSubmit}
+                  disabled={inputValue.trim().length < 2}
+                  className={`w-full py-4 rounded-xl text-lg font-bold transition-all flex items-center justify-center gap-2
+                    ${inputValue.trim().length >= 2
+                      ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-red-600/30' 
+                      : 'bg-stone-200 text-stone-400 cursor-not-allowed'}`}
                 >
-                  <span>{opt}</span>
-                  {isMultiSelect ? (
-                    <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors
-                      ${isSelected ? 'border-red-600 bg-red-600' : 'border-stone-300 group-hover:border-red-400'}`}>
-                      {isSelected && <CheckCircle2 className="w-4 h-4 text-white" strokeWidth={3} />}
-                    </div>
-                  ) : (
-                    <span className="w-6 h-6 rounded-full border-2 border-stone-300 group-hover:border-red-600 flex items-center justify-center flex-shrink-0">
-                      <span className="w-2.5 h-2.5 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    </span>
-                  )}
+                  Continuar <ArrowRight className="w-5 h-5" />
                 </button>
-              );
-            })}
+              </div>
+            ) : (
+              q.options.map((opt, i) => {
+                const isSelected = isMultiSelect && multiSelections.includes(opt);
+                return (
+                  <button
+                    key={i}
+                    onClick={() => handleOptionSelect(opt)}
+                    className={`w-full text-left px-5 py-4 sm:px-6 sm:py-5 rounded-2xl border-2 transition-all shadow-sm flex items-center justify-between group
+                      ${isSelected 
+                        ? 'border-red-600 bg-red-50 text-stone-900' 
+                        : 'border-stone-200 hover:border-red-600 hover:bg-neutral-50 text-stone-800'} 
+                      font-bold sm:text-lg`}
+                  >
+                    <span>{opt}</span>
+                    {isMultiSelect ? (
+                      <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors
+                        ${isSelected ? 'border-red-600 bg-red-600' : 'border-stone-300 group-hover:border-red-400'}`}>
+                        {isSelected && <CheckCircle2 className="w-4 h-4 text-white" strokeWidth={3} />}
+                      </div>
+                    ) : (
+                      <span className="w-6 h-6 rounded-full border-2 border-stone-300 group-hover:border-red-600 flex items-center justify-center flex-shrink-0">
+                        <span className="w-2.5 h-2.5 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                      </span>
+                    )}
+                  </button>
+                );
+              })
+            )}
           </div>
 
           {isMultiSelect && (
