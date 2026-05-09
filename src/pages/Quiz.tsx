@@ -227,8 +227,7 @@ export default function Quiz() {
       <div className="w-full max-w-xl">
         {/* Progress Bar */}
         <div className="mb-6 sm:mb-8 px-4 sm:px-0">
-           <div className="flex justify-between text-sm font-medium text-stone-500 mb-2">
-             <span>Pergunta {currentQuestion + 1} de {QUESTIONS.length}</span>
+           <div className="flex justify-end text-sm font-medium text-stone-500 mb-2">
              <span>{q.progress}%</span>
            </div>
            <div className="w-full h-3 bg-stone-200 rounded-full overflow-hidden">
