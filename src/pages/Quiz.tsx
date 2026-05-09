@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, ShieldAlert, ArrowRight } from 'lucide-react';
 import { trackEvent, FunnelEvent } from '../lib/analytics';
+import { VideoPlayer } from '../components/VideoPlayer';
 
 const QUESTIONS = [
   {
@@ -193,7 +194,14 @@ export default function Quiz() {
             <span className="text-lg">⚠️</span> Seus dados são 100% confidenciais
           </div>
 
-          <img src="https://xyzgvsuttwrvbyyxdppq.supabase.co/storage/v1/object/public/imagens/1pote.png" alt="LibidMen" className="w-48 sm:w-64 h-auto object-contain mx-auto mb-8 drop-shadow-2xl relative z-10" />
+          <div className="max-w-sm mx-auto mb-8 relative z-10 rounded-2xl overflow-hidden shadow-2xl border-[3px] border-stone-100">
+            <VideoPlayer
+              playerId="69ff56e8f18251980ded5cdf"
+              smartPlayerId="ceaefeeb-feef-4b52-8911-9ec9de0d5b6b"
+              scriptSrc="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js"
+              aspectRatioPadding="100%"
+            />
+          </div>
           
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading mb-4 text-stone-900 relative z-10 tracking-tight leading-tight">
             Descubra em 1 minuto se suas artérias penianas estão entupidas — e qual é a fórmula correta para o seu caso!
