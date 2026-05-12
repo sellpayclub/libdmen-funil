@@ -473,6 +473,40 @@ export default function VSL() {
         </div>
 
         
+        {/* Safety & Contraindications */}
+        <div className="bg-green-50 px-4 py-8 sm:p-12 mb-16 relative sm:rounded-[2.5rem] sm:shadow-lg border border-green-100 overflow-hidden">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-green-200 rounded-full blur-[80px] -ml-32 -mt-32 pointer-events-none opacity-50"></div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 relative z-10 mx-auto max-w-4xl">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-green-100">
+              <ShieldCheck className="w-12 h-12 sm:w-16 sm:h-16 text-green-600" />
+            </div>
+            
+            <div className="text-center md:text-left">
+              <h2 className="text-3xl sm:text-4xl font-black text-stone-900 mb-4 font-heading tracking-tight leading-tight">
+                100% Seguro e <span className="text-green-700">Sem Contraindicações</span>
+              </h2>
+              <p className="text-stone-700 sm:text-lg mb-4 font-medium leading-relaxed">
+                Por ser uma fórmula exclusiva desenvolvida com ingredientes naturais de alta pureza, o LibidMen <strong>não possui efeitos colaterais e não interage com outros medicamentos</strong>.
+              </p>
+              <ul className="text-stone-700 sm:text-lg space-y-2 font-medium">
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  <span>Seguro para hipertensos</span>
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  <span>Seguro para diabéticos</span>
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  <span>Aprovado por orgãos regulamentadores</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         {/* Final CTA */}
           <div className="flex justify-center px-4 sm:px-0 mt-8 mb-8">
             <Link to="/quiz" className="w-full sm:w-auto bg-gradient-to-b from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-black text-[clamp(1rem,4vw,1.3rem)] py-5 px-6 sm:px-10 rounded-2xl shadow-[0_10px_30px_-10px_rgba(220,38,38,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(220,38,38,0.8)] transition-all flex items-center justify-center gap-3 uppercase tracking-wider scale-100 hover:scale-[1.02] active:scale-[0.98]">

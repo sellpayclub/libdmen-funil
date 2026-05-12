@@ -1,4 +1,4 @@
-import { ShieldCheck, Activity, Droplet } from 'lucide-react';
+import { ShieldCheck, Activity, Droplet, CheckCircle2 } from 'lucide-react';
 import { trackEvent, FunnelEvent } from '../lib/analytics';
 import { useEffect } from 'react';
 
@@ -195,6 +195,40 @@ export default function VSLWhite() {
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <span className="text-stone-700 leading-relaxed">Já orientou processos de melhora de qualidade de vida para centenas de pacientes através da nutrição.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Safety & Contraindications */}
+        <div className="bg-green-50 px-4 py-8 sm:p-12 mb-16 relative sm:rounded-[2.5rem] sm:shadow-lg border border-green-100 overflow-hidden">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-green-200 rounded-full blur-[80px] -ml-32 -mt-32 pointer-events-none opacity-50"></div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 relative z-10 mx-auto max-w-4xl">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 shrink-0 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-green-100">
+              <ShieldCheck className="w-12 h-12 sm:w-16 sm:h-16 text-green-600" />
+            </div>
+            
+            <div className="text-center md:text-left">
+              <h2 className="text-3xl sm:text-4xl font-black text-stone-900 mb-4 font-heading tracking-tight leading-tight">
+                100% Seguro e <span className="text-green-700">Sem Contraindicações</span>
+              </h2>
+              <p className="text-stone-700 sm:text-lg mb-4 font-medium leading-relaxed">
+                Por ser uma fórmula exclusiva desenvolvida com ingredientes naturais de alta pureza, o LibidMen <strong>não possui efeitos colaterais e não interage com outros medicamentos</strong>.
+              </p>
+              <ul className="text-stone-700 sm:text-lg space-y-2 font-medium">
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  <span>Seguro para hipertensos</span>
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  <span>Seguro para diabéticos</span>
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
+                  <span>Aprovado por orgãos regulamentadores</span>
                 </li>
               </ul>
             </div>
